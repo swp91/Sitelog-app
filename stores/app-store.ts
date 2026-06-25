@@ -9,7 +9,8 @@ import {
   signOut,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  updateProfile as updateAuthProfile
+  updateProfile as updateAuthProfile,
+  User as FirebaseUser
 } from 'firebase/auth'
 import {
   doc,
@@ -19,7 +20,10 @@ import {
   updateDoc,
   deleteDoc,
   collection,
-  onSnapshot
+  onSnapshot,
+  QuerySnapshot,
+  DocumentData,
+  QueryDocumentSnapshot
 } from 'firebase/firestore'
 
 interface AppState {
@@ -162,58 +166,58 @@ export const useAppStore = create<AppState>((set, get) => ({
     const unsubs: (() => void)[] = []
 
     try {
-      const sitesUnsub = onSnapshot(collection(db, 'users', uid, 'sites'), (snapshot) => {
+      const sitesUnsub = onSnapshot(collection(db, 'users', uid, 'sites'), (snapshot: QuerySnapshot<DocumentData>) => {
         const sitesList: Site[] = []
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           sitesList.push({ id: d.id, ...d.data() } as Site)
         })
         set({ sites: sitesList })
-      }, (err) => console.error('Sites sync error:', err))
+      }, (err: Error) => console.error('Sites sync error:', err))
       unsubs.push(sitesUnsub)
 
-      const tradesUnsub = onSnapshot(collection(db, 'users', uid, 'trades'), (snapshot) => {
+      const tradesUnsub = onSnapshot(collection(db, 'users', uid, 'trades'), (snapshot: QuerySnapshot<DocumentData>) => {
         const tradesList: Trade[] = []
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           tradesList.push({ id: d.id, ...d.data() } as Trade)
         })
         set({ trades: tradesList })
-      }, (err) => console.error('Trades sync error:', err))
+      }, (err: Error) => console.error('Trades sync error:', err))
       unsubs.push(tradesUnsub)
 
-      const recordsUnsub = onSnapshot(collection(db, 'users', uid, 'records'), (snapshot) => {
+      const recordsUnsub = onSnapshot(collection(db, 'users', uid, 'records'), (snapshot: QuerySnapshot<DocumentData>) => {
         const recordsObj: Records = {}
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           recordsObj[d.id] = d.data() as DayRecord
         })
         set({ records: recordsObj })
-      }, (err) => console.error('Records sync error:', err))
+      }, (err: Error) => console.error('Records sync error:', err))
       unsubs.push(recordsUnsub)
 
-      const journalsUnsub = onSnapshot(collection(db, 'users', uid, 'journals'), (snapshot) => {
+      const journalsUnsub = onSnapshot(collection(db, 'users', uid, 'journals'), (snapshot: QuerySnapshot<DocumentData>) => {
         const journalsObj: Journals = {}
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           journalsObj[d.id] = d.data() as Journal
         })
         set({ journals: journalsObj })
-      }, (err) => console.error('Journals sync error:', err))
+      }, (err: Error) => console.error('Journals sync error:', err))
       unsubs.push(journalsUnsub)
 
-      const workerSitesUnsub = onSnapshot(collection(db, 'users', uid, 'workerSites'), (snapshot) => {
+      const workerSitesUnsub = onSnapshot(collection(db, 'users', uid, 'workerSites'), (snapshot: QuerySnapshot<DocumentData>) => {
         const workerSitesList: WorkerSite[] = []
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           workerSitesList.push({ id: d.id, ...d.data() } as WorkerSite)
         })
         set({ workerSites: workerSitesList })
-      }, (err) => console.error('WorkerSites sync error:', err))
+      }, (err: Error) => console.error('WorkerSites sync error:', err))
       unsubs.push(workerSitesUnsub)
 
-      const workerRecordsUnsub = onSnapshot(collection(db, 'users', uid, 'workerRecords'), (snapshot) => {
+      const workerRecordsUnsub = onSnapshot(collection(db, 'users', uid, 'workerRecords'), (snapshot: QuerySnapshot<DocumentData>) => {
         const workerRecordsList: WorkerRecord[] = []
-        snapshot.forEach((d) => {
+        snapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
           workerRecordsList.push({ id: d.id, ...d.data() } as WorkerRecord)
         })
         set({ workerRecords: workerRecordsList })
-      }, (err) => console.error('WorkerRecords sync error:', err))
+      }, (err: Error) => console.error('WorkerRecords sync error:', err))
       unsubs.push(workerRecordsUnsub)
 
       set({ unsubscribes: unsubs })
@@ -243,38 +247,38 @@ export const useAppStore = create<AppState>((set, get) => ({
     // 1. Sites 로드
     const sitesSnapshot = await getDocs(collection(db, 'users', uid, 'sites'))
     const sitesList: Site[] = []
-    sitesSnapshot.forEach((d) => {
+    sitesSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       sitesList.push({ id: d.id, ...d.data() } as Site)
     })
 
     // 2. 나머지 데이터 정상 조회
     const tradesSnapshot = await getDocs(collection(db, 'users', uid, 'trades'))
     const tradesList: Trade[] = []
-    tradesSnapshot.forEach((d) => {
+    tradesSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       tradesList.push({ id: d.id, ...d.data() } as Trade)
     })
 
     const recordsSnapshot = await getDocs(collection(db, 'users', uid, 'records'))
     const recordsObj: Records = {}
-    recordsSnapshot.forEach((d) => {
+    recordsSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       recordsObj[d.id] = d.data() as DayRecord
     })
 
     const journalsSnapshot = await getDocs(collection(db, 'users', uid, 'journals'))
     const journalsObj: Journals = {}
-    journalsSnapshot.forEach((d) => {
+    journalsSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       journalsObj[d.id] = d.data() as Journal
     })
 
     const workerSitesSnapshot = await getDocs(collection(db, 'users', uid, 'workerSites'))
     const workerSitesList: WorkerSite[] = []
-    workerSitesSnapshot.forEach((d) => {
+    workerSitesSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       workerSitesList.push({ id: d.id, ...d.data() } as WorkerSite)
     })
 
     const workerRecordsSnapshot = await getDocs(collection(db, 'users', uid, 'workerRecords'))
     const workerRecordsList: WorkerRecord[] = []
-    workerRecordsSnapshot.forEach((d) => {
+    workerRecordsSnapshot.forEach((d: QueryDocumentSnapshot<DocumentData>) => {
       workerRecordsList.push({ id: d.id, ...d.data() } as WorkerRecord)
     })
 
@@ -501,7 +505,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 // Firebase Auth 실시간 리스너 작동 (React Native 특성 상 항상 구동)
 useAppStore.getState().initTheme()
 
-onAuthStateChanged(auth, async (firebaseUser) => {
+onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
   if (firebaseUser) {
     try {
       const docRef = doc(db, 'users', firebaseUser.uid)

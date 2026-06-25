@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
   },
   heroValueContainer: {
     flexDirection: 'row',
-    alignItems: 'end',
+    alignItems: 'flex-end',
     marginTop: 8,
     marginBottom: 12,
   },

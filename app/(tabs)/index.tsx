@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   },
   heroCardValueContainer: {
     flexDirection: 'row',
-    alignItems: 'end',
+    alignItems: 'flex-end',
     marginTop: 8,
     marginBottom: 12,
   },
