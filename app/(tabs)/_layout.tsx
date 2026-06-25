@@ -1,7 +1,6 @@
 import { Tabs } from 'expo-router';
-import { Platform } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 import { LayoutDashboard, Briefcase, Calendar, Coins, Menu } from 'lucide-react-native';
-import { useColorScheme } from '@/components/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -41,7 +40,7 @@ export default function TabLayout() {
           title: '홈 요약',
           tabBarLabel: '홈',
           tabBarIcon: ({ color }) => (
-            <LayoutDashboard color={color} size={22} />
+            <LayoutDashboard stroke={color} size={22} />
           ),
         }}
       />
@@ -51,7 +50,7 @@ export default function TabLayout() {
           title: '현장 목록',
           tabBarLabel: '현장',
           tabBarIcon: ({ color }) => (
-            <Briefcase color={color} size={22} />
+            <Briefcase stroke={color} size={22} />
           ),
         }}
       />
@@ -61,7 +60,7 @@ export default function TabLayout() {
           title: '통합 일정',
           tabBarLabel: '달력',
           tabBarIcon: ({ color }) => (
-            <Calendar color={color} size={22} />
+            <Calendar stroke={color} size={22} />
           ),
         }}
       />
@@ -71,7 +70,7 @@ export default function TabLayout() {
           title: '노무비 계산',
           tabBarLabel: '노무비',
           tabBarIcon: ({ color }) => (
-            <Coins color={color} size={22} />
+            <Coins stroke={color} size={22} />
           ),
         }}
       />
@@ -81,7 +80,7 @@ export default function TabLayout() {
           title: '더 보기',
           tabBarLabel: '더보기',
           tabBarIcon: ({ color }) => (
-            <Menu color={color} size={22} />
+            <Menu stroke={color} size={22} />
           ),
         }}
       />

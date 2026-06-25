@@ -135,7 +135,7 @@ export default function SitesScreen() {
                     <Text style={styles.siteName}>{site.name}</Text>
                     {site.addr ? (
                       <View style={styles.iconRow}>
-                        <MapPin color="#94a3b8" size={12} style={styles.rowIcon} />
+                        <MapPin stroke="#94a3b8" size={12} style={styles.rowIcon} />
                         <Text style={styles.addrText} numberOfLines={1}>{site.addr}</Text>
                       </View>
                     ) : null}
@@ -149,7 +149,7 @@ export default function SitesScreen() {
 
                 {site.manager ? (
                   <View style={[styles.iconRow, styles.managerRow]}>
-                    <User color="#64748b" size={13} style={styles.rowIcon} />
+                    <User stroke="#64748b" size={13} style={styles.rowIcon} />
                     <Text style={styles.managerText}>담당: {site.manager}</Text>
                   </View>
                 ) : null}
@@ -159,10 +159,10 @@ export default function SitesScreen() {
                   <View style={styles.actionButtons}>
                     <TouchableOpacity
                       style={styles.actionButton}
-                      onPress={() => router.push(`/sites/${site.id}`)}
+                      onPress={() => router.push(`/sites/${site.id}` as any)}
                       activeOpacity={0.7}
                     >
-                      <ClipboardList color="#2563eb" size={13} style={styles.buttonIcon} />
+                      <ClipboardList stroke="#2563eb" size={13} style={styles.buttonIcon} />
                       <Text style={styles.actionButtonText}>기록</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -170,7 +170,7 @@ export default function SitesScreen() {
                       onPress={() => openEdit(site)}
                       activeOpacity={0.7}
                     >
-                      <Pencil color="#475569" size={13} style={styles.buttonIcon} />
+                      <Pencil stroke="#475569" size={13} style={styles.buttonIcon} />
                       <Text style={[styles.actionButtonText, styles.outlineButtonText]}>수정</Text>
                     </TouchableOpacity>
                   </View>
@@ -187,7 +187,7 @@ export default function SitesScreen() {
         onPress={openNew}
         activeOpacity={0.8}
       >
-        <Plus color="#ffffff" size={26} />
+        <Plus stroke="#ffffff" size={26} />
       </TouchableOpacity>
 
       {/* Bottom Sheet Form (Modal) */}
@@ -212,7 +212,7 @@ export default function SitesScreen() {
                 style={styles.closeButton}
                 activeOpacity={0.7}
               >
-                <X color="#475569" size={20} />
+                <X stroke="#475569" size={20} />
               </TouchableOpacity>
             </View>
 
@@ -302,7 +302,7 @@ export default function SitesScreen() {
                     onPress={() => remove(sheet as Site)}
                     activeOpacity={0.8}
                   >
-                    <Trash2 color="#ef4444" size={16} style={styles.buttonIcon} />
+                    <Trash2 stroke="#ef4444" size={16} style={styles.buttonIcon} />
                     <Text style={styles.deleteButtonText}>현장 삭제</Text>
                   </TouchableOpacity>
                 ) : null}

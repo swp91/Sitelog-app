@@ -164,7 +164,7 @@ export default function DashboardScreen() {
           <View style={styles.siteList}>
             {activeSites.length === 0 ? (
               <View style={styles.emptyState}>
-                <Briefcase color="#94a3b8" size={32} />
+                <Briefcase stroke="#94a3b8" size={32} />
                 <Text style={styles.emptyStateText}>현재 진행 중인 현장이 없습니다.</Text>
               </View>
             ) : (
@@ -179,7 +179,7 @@ export default function DashboardScreen() {
                   <TouchableOpacity
                     key={site.id}
                     style={styles.siteCard}
-                    onPress={() => router.push(`/sites/${site.id}`)}
+                    onPress={() => router.push(`/sites/${site.id}` as any)}
                     activeOpacity={0.7}
                   >
                     <View style={styles.siteCardHeader}>

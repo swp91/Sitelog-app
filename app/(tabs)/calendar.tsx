@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  Dimensions
+  Dimensions,
+  useColorScheme
 } from 'react-native'
 import { useAppStore } from '../../stores/app-store'
 import { dayTotal, allSitesDayTotal, ymd, addDays, isSameDay, startOfMonth, endOfMonth, fmtKDate } from '../../lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react-native'
-import { useColorScheme } from '@/components/useColorScheme'
 
 const SITE_COLORS = ['#2563EB', '#0EA5E9', '#8B5CF6', '#F59E0B', '#14B8A6', '#EC4899', '#6366F1', '#EF4444']
 
@@ -110,7 +110,7 @@ export default function CalendarScreen() {
               onPress={() => setViewMonth((m) => new Date(m.getFullYear(), m.getMonth() - 1, 1))}
               activeOpacity={0.7}
             >
-              <ChevronLeft size={20} color={isDark ? '#cbd5e1' : '#475569'} />
+              <ChevronLeft size={20} stroke={isDark ? '#cbd5e1' : '#475569'} />
             </TouchableOpacity>
             <Text style={[styles.calendarMonthText, themeTextStyle]}>
               {viewMonth.getFullYear()}년 {viewMonth.getMonth() + 1}월
@@ -120,7 +120,7 @@ export default function CalendarScreen() {
               onPress={() => setViewMonth((m) => new Date(m.getFullYear(), m.getMonth() + 1, 1))}
               activeOpacity={0.7}
             >
-              <ChevronRight size={20} color={isDark ? '#cbd5e1' : '#475569'} />
+              <ChevronRight size={20} stroke={isDark ? '#cbd5e1' : '#475569'} />
             </TouchableOpacity>
           </View>
 

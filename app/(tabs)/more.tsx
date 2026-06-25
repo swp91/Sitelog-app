@@ -12,12 +12,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
-  Dimensions
+  Dimensions,
+  useColorScheme
 } from 'react-native'
 import { useAppStore } from '../../stores/app-store'
 import { useRouter } from 'expo-router'
 import { LogOut, RefreshCcw, Bell, Moon, Sun, ChevronRight, User, Settings, X, ShieldAlert } from 'lucide-react-native'
-import { useColorScheme } from '@/components/useColorScheme'
 
 export default function MoreScreen() {
   const {
@@ -181,7 +181,7 @@ export default function MoreScreen() {
         <View style={[styles.card, themeCardStyle]}>
           <View style={styles.cardHeaderIconRow}>
             <View style={[styles.headerIconBg, { backgroundColor: '#eff6ff' }]}>
-              <RefreshCcw size={18} color="#2563eb" />
+              <RefreshCcw size={18} stroke="#2563eb" />
             </View>
             <View style={styles.headerIconTextGroup}>
               <Text style={[styles.cardSectionTitle, themeTextStyle]}>모드 전환</Text>
@@ -193,7 +193,7 @@ export default function MoreScreen() {
             onPress={handleSwitchType}
             activeOpacity={0.8}
           >
-            <RefreshCcw size={14} color="#2563eb" style={styles.switchButtonIcon} />
+            <RefreshCcw size={14} stroke="#2563eb" style={styles.switchButtonIcon} />
             <Text style={styles.switchButtonText}>{nextLabel}</Text>
           </TouchableOpacity>
         </View>
@@ -206,7 +206,7 @@ export default function MoreScreen() {
           <View style={[styles.listItem, { borderBottomColor: themeBorderColor }]}>
             <View style={styles.listItemLeft}>
               <View style={styles.listItemIconBg}>
-                {theme === 'dark' ? <Moon size={16} color="#d97706" /> : <Sun size={16} color="#ea580c" />}
+                {theme === 'dark' ? <Moon size={16} stroke="#d97706" /> : <Sun size={16} stroke="#ea580c" />}
               </View>
               <View>
                 <Text style={[styles.listItemLabel, themeTextStyle]}>다크 테마 설정</Text>
@@ -248,7 +248,7 @@ export default function MoreScreen() {
           
           <View style={[styles.listItem, { borderBottomColor: themeBorderColor }]}>
             <View style={styles.listItemLeft}>
-              <Bell size={16} color="#64748b" style={styles.bellIcon} />
+              <Bell size={16} stroke="#64748b" style={styles.bellIcon} />
               <View>
                 <Text style={[styles.listItemLabel, themeTextStyle]}>미입력 현장 알림</Text>
                 <Text style={styles.listItemDesc}>출근 기록이 누락된 현장이 있을 때 푸시 알림</Text>
@@ -264,7 +264,7 @@ export default function MoreScreen() {
 
           <View style={[styles.listItem, { borderBottomColor: themeBorderColor }]}>
             <View style={styles.listItemLeft}>
-              <Bell size={16} color="#64748b" style={styles.bellIcon} />
+              <Bell size={16} stroke="#64748b" style={styles.bellIcon} />
               <View>
                 <Text style={[styles.listItemLabel, themeTextStyle]}>주간 요약 리포트</Text>
                 <Text style={styles.listItemDesc}>매주 월요일 지난주 인건비 통계 리포트 받기</Text>
@@ -280,7 +280,7 @@ export default function MoreScreen() {
 
           <View style={styles.listItem}>
             <View style={styles.listItemLeft}>
-              <Bell size={16} color="#64748b" style={styles.bellIcon} />
+              <Bell size={16} stroke="#64748b" style={styles.bellIcon} />
               <View>
                 <Text style={[styles.listItemLabel, themeTextStyle]}>업체 투입 변동 알림</Text>
                 <Text style={styles.listItemDesc}>현장 내 공종별 인원 변동 건수 발생 시 알림</Text>
@@ -301,7 +301,7 @@ export default function MoreScreen() {
           onPress={handleLogout}
           activeOpacity={0.8}
         >
-          <LogOut size={16} color="#ef4444" style={styles.logoutIcon} />
+          <LogOut size={16} stroke="#ef4444" style={styles.logoutIcon} />
           <Text style={styles.logoutText}>로그아웃</Text>
         </TouchableOpacity>
 
@@ -326,7 +326,7 @@ export default function MoreScreen() {
                 style={styles.closeButton}
                 activeOpacity={0.7}
               >
-                <X color="#475569" size={20} />
+                <X stroke="#475569" size={20} />
               </TouchableOpacity>
             </View>
 

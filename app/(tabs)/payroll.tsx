@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Dimensions,
-  Platform
+  Platform,
+  useColorScheme
 } from 'react-native'
 import { useAppStore } from '../../stores/app-store'
 import { tradeManDays, ymd, startOfMonth, endOfMonth, wonFmt, wonShort, shareText } from '../../lib/utils'
 import { ChevronLeft, ChevronRight, Share2 } from 'lucide-react-native'
-import { useColorScheme } from '@/components/useColorScheme'
 
 const TODAY = new Date()
 
@@ -77,7 +77,7 @@ export default function PayrollScreen() {
           onPress={() => setMonth((m) => new Date(m.getFullYear(), m.getMonth() - 1, 1))}
           activeOpacity={0.7}
         >
-          <ChevronLeft size={20} color={isDark ? '#cbd5e1' : '#475569'} />
+          <ChevronLeft size={20} stroke={isDark ? '#cbd5e1' : '#475569'} />
         </TouchableOpacity>
         <Text style={[styles.monthTitleText, themeTextStyle]}>
           {month.getFullYear()}년 {month.getMonth() + 1}월
@@ -87,7 +87,7 @@ export default function PayrollScreen() {
           onPress={() => setMonth((m) => new Date(m.getFullYear(), m.getMonth() + 1, 1))}
           activeOpacity={0.7}
         >
-          <ChevronRight size={20} color={isDark ? '#cbd5e1' : '#475569'} />
+          <ChevronRight size={20} stroke={isDark ? '#cbd5e1' : '#475569'} />
         </TouchableOpacity>
       </View>
 
@@ -166,7 +166,7 @@ export default function PayrollScreen() {
               onPress={handleShare}
               activeOpacity={0.7}
             >
-              <Share2 color="#2563eb" size={14} style={styles.shareButtonIcon} />
+              <Share2 stroke="#2563eb" size={14} style={styles.shareButtonIcon} />
               <Text style={styles.shareButtonText}>정산 공유</Text>
             </TouchableOpacity>
           </View>
